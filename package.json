@@ -1,0 +1,21 @@
+{
+  "name": "youtubeclone",
+  "version": "1.0.0",
+  "description": "App to watch videos.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ninemoonz/youtube-clone.git"
+  },
+  "scripts": {
+    "win": "node index.js"
+  },
+  "author": "Koodal Kweon<granum99@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ninemoonz/youtube-clone/issues"
+  },
+  "homepage": "https://github.com/ninemoonz/youtube-clone#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
