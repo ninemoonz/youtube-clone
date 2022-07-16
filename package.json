@@ -7,7 +7,7 @@
     "url": "git+https://github.com/ninemoonz/youtube-clone.git"
   },
   "scripts": {
-    "win": "node index.js"
+    "dev": "nodemon --exec babel-node index.js"
   },
   "author": "Koodal Kweon<granum99@gmail.com>",
   "license": "MIT",
@@ -17,5 +17,11 @@
   "homepage": "https://github.com/ninemoonz/youtube-clone#readme",
   "dependencies": {
     "express": "^4.18.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.18.6",
+    "@babel/node": "^7.18.6",
+    "@babel/preset-env": "^7.18.6",
+    "nodemon": "^2.0.19"
   }
 }
