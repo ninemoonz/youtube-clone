@@ -1,9 +1,8 @@
-const fakeUser = {
-    username: "Koodal",
-    loggedIn: false,
-}
 
-export const trending = (req, res) => res.render("home", { pageTitle: "Home", fakeUser });
+export const trending = (req, res) => {
+    const videos = [1,2,3,4,5,6];
+    res.render("home", { pageTitle: "Home", videos });
+};
 
 export const see = (req, res) => res.render("watch", { pageTitle: "VideoTitle"});
 
