@@ -1,6 +1,32 @@
 
 export const trending = (req, res) => {
-    const videos = [1,2,3,4,5,6];
+    const videos = [
+        {
+            title: "Planet of Apes",
+            rating: 4.3,
+            comments: 23,
+            createdAt: "2 minutes ago",
+            views: 220,
+            id: 1,
+        },
+        {
+            title: "Planet of Apes 2",
+            rating: 4.3,
+            comments: 23,
+            createdAt: "2 minutes ago",
+            views: 220,
+            id: 1,
+        },
+        {
+            title: "Planet of Apes 3",
+            rating: 4.3,
+            comments: 23,
+            createdAt: "2 minutes ago",
+            views: 220,
+            id: 1,
+        },
+
+    ];
     res.render("home", { pageTitle: "Home", videos });
 };
 
