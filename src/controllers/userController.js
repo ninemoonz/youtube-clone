@@ -3,4 +3,4 @@ export const edit = (req, res) => res.render("edit", {pageTitle: "Edit"});
 export const remove = (req, res) => res.send("Delete user");
 export const login = (req, res) => res.send("Login");
 export const logout = (req, res) => res.send("Logout");
-export const see = (req, res) => res.send("Watch video");
+export const watch = (req, res) => res.send("Watch video");
