@@ -7,7 +7,7 @@
     "url": "git+https://github.com/ninemoonz/youtube-clone.git"
   },
   "scripts": {
-    "dev": "nodemon --exec babel-node src/server.js"
+    "dev": "nodemon --exec babel-node src/init.js"
   },
   "author": "Koodal Kweon<granum99@gmail.com>",
   "license": "MIT",
