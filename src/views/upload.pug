@@ -5,4 +5,6 @@ block content
     h2 Upload a video!
         form(method="POST")
             input(name="title", placeholder="Title", required, type="text") 
+            input(name="description", placeholder="Description", required, type="text") 
+            input(name="hashtags", placeholder="#hashtags separated by comma", required, type="text") 
             input(type="submit", value="Upload")
