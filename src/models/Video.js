@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-
+ 
 //define the shape: schema
 const videoSchema = new mongoose.Schema({
     title: {type: String, required: true, trim: true, maxLength:80 },
@@ -12,6 +12,10 @@ const videoSchema = new mongoose.Schema({
     },
 });
 
+//static
+videoSchema.static("formatHashtags", function(hashtags) {
+    return hashtags.split(",").map((word) => (word.startsWith("#") ? word : `#${word}`));
+});
 //actual model
 const Video = mongoose.model("Video", videoSchema);
 export default Video;
