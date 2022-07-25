@@ -62,7 +62,8 @@ export const postLogin = async(req, res) => {
             errorMessage: "The password is not correct!"});
     }
     // Gotta make remember the user by using cookie
-    console.log("Log user in! Coming soon!");
+    req.session.loggedIn = true;
+    req.session.user = user;
     res.redirect("/");
 };
 export const edit = (req, res) => res.render("edit", {pageTitle: "Edit"});
