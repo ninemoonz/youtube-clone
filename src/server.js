@@ -20,8 +20,8 @@ app.use(express.urlencoded({ extended: true })); // understands and transform th
 
 app.use(session({
     secret: "Hello",
-    resave: true,
-    saveUninitialized: true,
+    resave: false,
+    saveUninitialized: false, //uninitialize session if it is new but not modified.
     store: MongoStore.create({mongoUrl: "mongodb://127.0.0.1:27017/youtubeclone"}),
 })
 );
