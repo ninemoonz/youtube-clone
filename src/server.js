@@ -19,10 +19,10 @@ app.use(logger);
 app.use(express.urlencoded({ extended: true })); // understands and transform the value in the form into javascript object
 
 app.use(session({
-    secret: "Hello",
+    secret: process.env.COOKIE_SECRET,
     resave: false,
-    saveUninitialized: false, //uninitialize session if it is new but not modified.
-    store: MongoStore.create({mongoUrl: "mongodb://127.0.0.1:27017/youtubeclone"}),
+    saveUninitialized: false, 
+    store: MongoStore.create({mongoUrl: process.env.DB_URL})
 })
 );
 
