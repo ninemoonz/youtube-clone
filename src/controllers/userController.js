@@ -1,6 +1,7 @@
 import User from "../models/User";
 import bcrypt from "bcrypt";
-import { request } from "express";
+import fetch from "node-fetch";
+
 
 export const getJoin = (req, res) => res.render("join", {pageTitle: "Join"});
 
@@ -95,11 +96,11 @@ export const finishGithubLogin = async(req, res) => {
         method:"POST",
         headers:{
             Accept: "application/json",
-        }
+        },
     });
-    const json = await data.json();
+    const json = await data.json(); //extracts json from the data
     console.log(json);
-    
+    res.send(JSON.stringify(json));
 };
 
 export const edit = (req, res) => res.render("edit", {pageTitle: "Edit"});
