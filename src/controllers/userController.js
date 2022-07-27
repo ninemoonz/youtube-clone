@@ -92,15 +92,38 @@ export const finishGithubLogin = async(req, res) => {
     const params = new URLSearchParams(config).toString();
     const finalUrl = `${baseUrl}?${params}`;
 
-    const data = await fetch(finalUrl, {
+    const tokenRequest = await (await fetch(finalUrl, {
         method:"POST",
         headers:{
             Accept: "application/json",
         },
-    });
-    const json = await data.json(); //extracts json from the data
-    console.log(json);
-    res.send(JSON.stringify(json));
+    })).json();
+    //extracts json from the data
+    if("access_token" in tokenRequest){
+        // access api
+        const {access_token} = tokenRequest;
+        const apiUrl = "https://api.github.com";
+        const userData = await (
+            await fetch(`${apiUrl}/user`, {
+            headers: {
+                Authorization: `token ${access_token}`
+            }
+        })).json();
+        console.log(userData);
+
+        const emailData = await (await fetch(`${apiUrl}/user/emails`, {
+            headers: {
+                Authorization: `token ${access_token}`
+            }
+        })).json();
+        const email = emailData.find(email => email.primary === true && email.verified === true);
+        console.log(email);
+        if(!email){
+            res.redirect("/login"); //add notification error later.
+        }
+    }else {
+        res.redirect("/login"); //add notification error later.
+    }
 };
 
 export const edit = (req, res) => res.render("edit", {pageTitle: "Edit"});
