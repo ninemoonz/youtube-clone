@@ -159,4 +159,4 @@ export const postEdit = (req, res) => {
     res.render("edit-profile");
 };
 
-export const watch = (req, res) => res.send("Watch video");
+export const see = (req, res) => res.send("Watch video");
