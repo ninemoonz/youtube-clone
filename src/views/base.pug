@@ -17,8 +17,9 @@ html(lang="kr")
                     if loggedIn
                         li
                             a(href="/users/logout") Log out
+                        
                         li 
-                            a(href="/my-profile") #{loggedInUser.name}'s profile
+                            a(href="/users/edit") Edit Profile
                     else
                         li 
                             a(href="/join") Join
