@@ -48,7 +48,7 @@ export const getLogin = (req, res) => {
 };
 export const postLogin = async(req, res) => {
     const {username, password} = req.body;
-    const user = await User.findOne({ username });
+    const user = await User.findOne({ username, socialOnly: false });
     const pageTitle = "Login";
     // check if account exists
     if(!user){
@@ -80,7 +80,6 @@ export const startGithubLogin = (req, res) => {
     const finalUrl = `${baseUrl}?${params}`;
     return res.redirect(finalUrl);
 };
-//code=070d0a1694d7800d90c5
 
 export const finishGithubLogin = async(req, res) => {
     const baseUrl = "https://github.com/login/oauth/access_token";
@@ -91,12 +90,14 @@ export const finishGithubLogin = async(req, res) => {
     }
     const params = new URLSearchParams(config).toString();
     const finalUrl = `${baseUrl}?${params}`;
-    const tokenRequest = await (await fetch(finalUrl, {
+    const tokenRequest = await 
+    (await fetch(finalUrl, {
         method:"POST",
         headers:{
             Accept: "application/json",
-        },
-    })).json();
+            },
+        })
+    ).json();
     //extracts json from the data
     if("access_token" in tokenRequest){
         // access api
@@ -124,30 +125,32 @@ export const finishGithubLogin = async(req, res) => {
         if(!emailObj){
             return res.redirect("/login"); //add notification error later.
         }
-        const existingUser = await User.findOne({ email: emailObj.email });
-        if(existingUser){
-            req.session.loggedIn = true;
-            req.session.user = existingUser;
-            return res.redirect("/");
-        } else {
-            // create an account
-            const user = await User.create({
+        let user = await User.findOne({ email: emailObj.email });
+        
+        if(!user){
+            user = await User.create({
                 name: userData.name, 
                 username: userData.login,
+                avatarUrl: userData.avatar_url,
                 email: emailObj.email, 
                 password: "", 
                 location: userData.location,
                 socialOnly: true,
             });
-            req.session.loggedIn = true;
-            req.session.user = user;
         }
-    }else {
-        return res.redirect("/login"); //add notification error later.
-    }
-};
+                req.session.loggedIn = true;
+                req.session.user = user;
+                return res.redirect("/");
+            }else {
+                return res.redirect("/login"); //add notification error later.
+            }
+        };   
 
+export const logout = (req, res) => {
+    req.session.destroy();
+    return res.redirect("/");
+};
 export const edit = (req, res) => res.render("edit", {pageTitle: "Edit"});
-export const remove = (req, res) => res.send("Delete user");
-export const logout = (req, res) => res.send("Logout");
+
+
 export const watch = (req, res) => res.send("Watch video");
