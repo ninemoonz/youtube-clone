@@ -163,6 +163,11 @@ export const postEdit = async (req, res) => {
         body: {name, email, username, location},
     } = req;
     
+    /*
+     So these two if statements check -
+     "Give an error when the value we put in exist in the usersDB,
+     even if it is different from the sessionDB"
+     */
     if(username !== req.session.user.username){
         const existingUsername = await User.exists({ username });
         if(existingUsername){
