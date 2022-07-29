@@ -1,9 +1,11 @@
 extends base
 
 block content
+    if errorMessage
+        span=errorMessage
     form(method="POST")
-        input(name="Name", type="text", required, placeholder="name", value=loggedInUser.name)
-        input(name="Email", type="email", required, placeholder="email" value=loggedInUser.email)
-        input(name="Username", type="text", required, placeholder="username" value=loggedInUser.username)
-        input(name="Location", type="text", placeholder="location", value=loggedInUser.location)
+        input(name="name", type="text", required, placeholder="Name", value=loggedInUser.name)
+        input(name="email", type="email", required, placeholder="Email" value=loggedInUser.email)
+        input(name="username", type="text", required, placeholder="Username" value=loggedInUser.username)
+        input(name="location", type="text", placeholder="Location", value=loggedInUser.location)
         input(type="submit", value="Update Profile")

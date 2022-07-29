@@ -150,13 +150,53 @@ export const logout = (req, res) => {
     req.session.destroy();
     return res.redirect("/");
 };
-
+//Edit Profile controllers
 export const getEdit = (req, res) => {
     res.render("edit-profile", {pageTitle: "Edit Profile"});
 };
 
-export const postEdit = (req, res) => {
-    res.render("edit-profile");
+export const postEdit = async (req, res) => {
+    const {
+        session: {
+            user: {_id},
+        },
+        body: {name, email, username, location},
+    } = req;
+    
+    if(username !== req.session.user.username){
+        const existingUsername = await User.exists({ username });
+        if(existingUsername){
+            return res.status(400).render("edit-profile", { 
+                errorMessage: "This username is already taken."});
+        };
+    };
+    if(email !== req.session.user.email){
+        const existingEmail = await User.exists({ email });
+        if(existingEmail){
+        return res.status(400).render("edit-profile", { 
+            errorMessage: "This username is already taken."});
+        };
+    };
+
+    const updatedUser = await User.findByIdAndUpdate(_id, {
+        name,
+        email,
+        username,
+        location,
+    },
+    {new: true});
+
+    
+
+    req.session.user = updatedUser;
+    res.redirect("/users/edit");
+    
+
+
+    
+    
+    
+
 };
 
 export const see = (req, res) => res.send("Watch video");

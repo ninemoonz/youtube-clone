@@ -11,15 +11,14 @@ html(lang="kr")
                     li 
                         a(href="/") Home
                     li 
-                        a(href="/videos/upload") Upload Video
-                    li 
                         a(href="/search") Search
                     if loggedIn
                         li
                             a(href="/users/logout") Log out
-                        
                         li 
                             a(href="/users/edit") Edit Profile
+                        li 
+                            a(href="/videos/upload") Upload Video
                     else
                         li 
                             a(href="/join") Join
