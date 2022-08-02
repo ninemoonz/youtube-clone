@@ -1,3 +1,5 @@
+//init.js is going to have anything to do with importing fundamental fines and start the server
+// server.js will only handling code related to expressJSs
 import "dotenv/config";
 
 import "./db";
