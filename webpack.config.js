@@ -1,11 +1,15 @@
 const path = require("path");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
  module.exports = {
+   plugins: [new MiniCssExtractPlugin({
+    filename: "css/styles.css",
+   })], 
    entry: "./src/client/js/main.js",
    mode: "development",
    output: {
-     filename: "main.js",
-     path: path.resolve(__dirname, "assets", "js"),
+     filename: "js/main.js",
+     path: path.resolve(__dirname, "assets"),
    },
    module: {
      rules: [
@@ -20,7 +24,7 @@ const path = require("path");
        },
        {
         test: /\.scss$/,
-        use: ["style-loader", "css-loader", "sass-loader"], //webpack process backward.
+        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"], //webpack process backward.
        },
      ],
    },
