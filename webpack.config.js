@@ -18,6 +18,10 @@ const path = require("path");
            },
          },
        },
+       {
+        test: /\.scss$/,
+        use: ["style-loader", "css-loader", "sass-loader"], //webpack process backward.
+       },
      ],
    },
  };
