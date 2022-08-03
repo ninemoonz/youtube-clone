@@ -2,7 +2,8 @@ extends base
 include mixins/video
 
 block content
-    each video in videos
-        +video(video)
-    else
-        li Sorry, We coudn't find the search...
+    div.video__grid
+        each video in videos
+            +video(video)
+        else
+            span.empty__message No Videos Found
