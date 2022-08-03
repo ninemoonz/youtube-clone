@@ -6,10 +6,12 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
     filename: "css/styles.css",
    })], 
    entry: "./src/client/js/main.js",
+   watch: true,
    mode: "development",
    output: {
      filename: "js/main.js",
      path: path.resolve(__dirname, "assets"),
+     clean: true,
    },
    module: {
      rules: [
