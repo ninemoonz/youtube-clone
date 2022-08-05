@@ -9,6 +9,8 @@ const totalTime = document.getElementById("totalTime");
 let volumeValue = 0.5;
 video.volume = volumeValue;
 
+const formatTime = (seconds) => new Date(seconds * 1000).toISOString().substring(11, 19);
+
 const handlePlayClick = (e) => {
     if(video.paused){
         video.play();
@@ -41,12 +43,12 @@ const handleVolumeChange = (event) => {
 }
 
 const handleLoadedMetadata = () => {
-    totalTime.innerText = Math.floor(video.duration);
+    totalTime.innerText = formatTime(Math.floor(video.duration));
 };
 
 const handleTimeUpdate = () => {
-    console.log(video.currentTime);
-    currentTime.innerText = Math.floor(video.currentTime);
+    
+    currentTime.innerText = formatTime(Math.floor(video.currentTime));
 };
 // Event Listener
 playBtn.addEventListener("click", handlePlayClick);
