@@ -120,16 +120,25 @@ const handleKeydown = (event) => {
     if(keyCode === 39){
         timeline.value = Math.floor(video.currentTime + 5);
         video.currentTime = timeline.value;
+        handleMouseMove();
     }
     // rewind 5 seconds
     if(keyCode === 37){
         timeline.value = Math.floor(video.currentTime - 5);
         video.currentTime = timeline.value;
+        handleMouseMove();
     }
 }
 
 const handleDoubleClick = () => {
     handleFullScreen();
+}
+
+const handleEnded = () => {
+    const { id } = videoContainer.dataset;
+    fetch(`/api/videos/${id}/view`, {
+        method: "POST",
+    });
 }
 // Event Listener
 video.addEventListener("loadedmetadata", handleLoadedMetadata);
@@ -142,6 +151,7 @@ muteBtn.addEventListener("click", handleMute);
 volumeRange.addEventListener("input", handleVolumeChange);
 timeline.addEventListener("input", handleTimelineChange);
 fullScreenBtn.addEventListener("click", handleFullScreen);
+video.addEventListener("ended", handleEnded);
 
 document.addEventListener("keydown", handleKeydown);
 video.addEventListener("dblclick", handleDoubleClick);
