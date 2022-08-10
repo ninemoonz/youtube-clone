@@ -1,13 +1,48 @@
 export const startBtn = document.getElementById("startBtn");
 const video = document.getElementById("preview");
 
-const handleStart = async ( ) => {
-    const stream = await navigator.mediaDevices.getUserMedia({
+let stream;
+let recorder;
+
+const handleDownload = () => {
+    
+}
+
+const handleStop = () => {
+    startBtn.innerText = "Download Recording";
+    startBtn.removeEventListener("click", handleStop);
+    startBtn.addEventListener("click", handleStart);
+    recorder.stop();
+
+
+}
+
+const handleStart = () => {
+    console.log("record");
+    startBtn.innerText = "Stop Recording";
+    startBtn.removeEventListener("click", handleStart);
+    startBtn.addEventListener("click", handleStop);
+    recorder = new MediaRecorder(stream);
+    recorder.ondataavailable = (event) => {
+        const videoFile = URL.createObjectURL(event.data);
+        
+        video.srcObject = null;
+        video.src = videoFile;
+        video.loop = true;
+        video.play();
+    }
+    recorder.start();
+}
+
+const init = async () => {
+    stream = await navigator.mediaDevices.getUserMedia({
         audio: true, 
-        video: {width: 200, height: 200}
+        video: true,
     });
     video.srcObject = stream;
     video.play();
 }
+
+init();
 
 startBtn.addEventListener("click", handleStart);
