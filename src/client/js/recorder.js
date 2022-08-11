@@ -38,6 +38,17 @@ const handleDownload = async () => {
     thumbA.download = "thumbNail.jpg";
     document.body.appendChild(thumbA);
     thumbA.click();
+
+    //Delet file in MEMFS (In-memory-filesystem)
+    ffmpeg.FS("unlink", "recording.webm");
+    ffmpeg.FS("unlink", "output.mp4");
+    ffmpeg.FS("unlink", "thumbnail.jpg");
+
+    //revokeObjectUrl
+    URL.revokeObjectURL(videoFile);
+    URL.revokeObjectURL(mp4Url);
+    URL.revokeObjectURL(jpgUrl);
+
 }
 
     
