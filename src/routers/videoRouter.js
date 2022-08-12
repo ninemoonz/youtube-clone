@@ -18,5 +18,4 @@ videoRouter.route("/:id([0-9a-f]{24})/edit").all(protectorMiddleware).get(getEdi
 videoRouter.route("/:id([0-9a-f]{24})/delete").all(protectorMiddleware).get(deleteVideo);
 videoRouter.route("/upload").all(protectorMiddleware).get(getUpload).post(videoUpload.single("video"), postUpload);
 
-
 export default videoRouter;
