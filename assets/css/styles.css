@@ -165,15 +165,28 @@ input:not(input[type=range])::placeholder {
   color: rgba(255, 255, 255, 0.7);
 }
 
+input:not(input[type=range]),
 input[type=submit],
 .social__btn {
   border-radius: 5px;
   padding: 12px 20px;
-  background-color: white;
-  color: rgba(255, 0, 0, 0.9);
-  text-align: center;
+  background-color: white !important;
+  color: rgba(255, 0, 0, 0.9) !important;
+  text-align: center !important;
   cursor: pointer;
   display: block;
+  border: none;
+}
+input:not(input[type=range]):focus,
+input[type=submit]:focus,
+.social__btn:focus {
+  outline: none;
+}
+input:not(input[type=range]):disabled,
+input[type=submit]:disabled,
+.social__btn:disabled {
+  opacity: 0.5;
+  pointer-events: none;
 }
 
 .social-login {
@@ -295,6 +308,20 @@ input[type=submit],
 }
 .edit-profile__password a {
   text-decoration: underline;
+}
+
+.upload__container {
+  width: 100%;
+}
+.upload__container .upload__video {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.upload__container .upload__video video {
+  max-width: 100%;
+  margin-bottom: 10px;
 }
 
 a {
