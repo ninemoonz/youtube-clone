@@ -20,10 +20,17 @@ block content
                 span#fullScreen
                     i.fas.fa-expand
     if loggedIn
-        div.video__comments
+        div.video__add-comments
             form.video__comment-form#commentForm
                 textarea(cols="30", rows="1", placeholder="Leave a comment")
                 button Add Comment
+    div.video__comments
+        ul 
+            each comment in video.comments.reverse()
+                li.video__comment 
+                    i.fas.fa-comment
+                    span   #{comment.text}
+
     //-
         div
             p=video.description
